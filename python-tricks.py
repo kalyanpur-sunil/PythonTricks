@@ -2,6 +2,7 @@ from __future__ import division
 from pprint import pprint
 import pdb
 import collections
+import json
  
 from collections import defaultdict
 # enumerate
@@ -182,7 +183,45 @@ key='a'
 if key in temp_dict:
 	print 'key present'
 
+# key present
 
+# keys available in one list 
+# values avalable in another list
+keys = ['KA','MH', 'TN']
+values = ['Karnataka', 'Maharastra', 'Tamil Nadu']
 
+key_value = zip(keys, values)
+print key_value
+# list of key, value pairs
+# [('KA', 'Karnataka'), ('MH', 'Maharastra'), ('TN', 'Tamil Nadu')]
 
+# constructing dict using zip
+print dict(zip(keys, values))
 
+rows = [
+		{'make':'bmw', 'year':2013, 'sales':2001},
+		{'make':'bmw', 'year':2012, 'sales':1001},
+		{'make':'audi', 'year':2013, 'sales':2001},
+		{'make':'bmw', 'year':2011, 'sales':900},
+		{'make':'bmw', 'year':2011, 'sales':900}
+	    ]
+pprint(rows)
+print('*******************')
+cummulative_values = defaultdict(lambda: defaultdict(int))
+for row in rows:
+	make = row['make']
+	year = row['year']
+	cummulative_values[make][year]+=row['sales']
+
+# pprint(cummulative_values)
+json.dumps(cummulative_values)
+# {
+#     "bmw": {
+#         "2011": 1800,
+#         "2012": 1001,
+#         "2013": 2001
+#     },
+#     "audi": {
+#         "2013": 2001
+#     }
+# }
